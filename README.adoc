@@ -1,0 +1,54 @@
+= JCGM publications bibliographic data for Relaton-JCGM
+
+This repository is used by Relaton (the `Relaton::Jcgm` flavor) to represent known
+JCGM publications. Data is stored in Relaton YAML format.
+
+JCGM records were previously served inside the BIPM flavor (under
+`relaton-data-bipm`); they now live here as their own flavor, indexed with
+`Pubid::Jcgm` identifiers.
+
+== Contents
+
+`data/jcgm/meeting/`:: JCGM committee meeting proceedings, generated from
+https://github.com/metanorma/bipm-data-outcomes (the `jcgm/meetings-en` and
+`jcgm/meetings-fr` directories).
+
+`static/jcgm/`:: Curated JCGM guide / GUM / VIM records (hand-maintained).
+
+`index-v1.yaml` / `index-v1.zip`:: The document index. Every row is a
+`Pubid::Jcgm::Identifier` hash (`_type: pubid:jcgm:*`), serialized in the compact
+flattened shape (`number: '100'`, `year: '2008'` as bare scalars; the
+publisher/type/stage are reconstructed from `_type` on load).
+`Relaton::Jcgm::Bibliography` downloads `index-v1.zip`. Unlike some sibling
+flavors (which keep a flat string index in `index-v1` and a structured pubid index
+in `index-v2`), this flavor stores the structured pubid index directly in
+`index-v1` — there is no v2.
+
+== Rebuilding
+
+[source,sh]
+----
+bundle install
+bundle exec ruby crawler.rb
+----
+
+`crawler.rb` clones `metanorma/bipm-data-outcomes` (or reuses a local
+`bipm-data-outcomes` symlink), regenerates `data/` (the meetings), indexes each
+curated `static/` guide through the gem's guarded `add_to_index`, and writes
+`index-v1.yaml` + `index-v1.zip`. The index holds 27 rows: 16 meetings + 11 guides
+(9 guide, 1 GUM guide, 1 corrigendum).
+
+== Dependency pins
+
+The `Gemfile` currently pins both `relaton` and `pubid` to local worktrees because
+each carries an unmerged change the dataset depends on:
+
+* `relaton` → the `feat/jcgm-flavor` worktree, which provides the unreleased
+  `Relaton::Jcgm` flavor (`DataFetcher` / `Bibliography`).
+* `pubid` → the `refactor/flatten-jcgm-to-hash` worktree, which provides the
+  flattened `Pubid::Jcgm` `to_hash`/`from_hash` the index is serialized with. This
+  is pinned by path (not a `git:` ref) because the change is still uncommitted in
+  that worktree; the bare `GUM`/`VIM-N` guide and `Corrigendum` parsing it builds
+  on is already merged to pubid `main`.
+
+Swap both back to github/rubygems references once the branches ship.

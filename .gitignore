@@ -1,0 +1,7 @@
+Gemfile.lock
+.bundle/
+vendor/
+.vscode/
+bipm-data-outcomes
+spec/examples.txt
+HANDOFFS/
