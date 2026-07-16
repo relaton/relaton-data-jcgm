@@ -40,15 +40,14 @@ curated `static/` guide through the gem's guarded `add_to_index`, and writes
 
 == Dependency pins
 
-The `Gemfile` currently pins both `relaton` and `pubid` to local worktrees because
-each carries an unmerged change the dataset depends on:
+The `Gemfile` tracks both `relaton` and `pubid` from their GitHub `main` branches
+via `git:` refs, because the dataset depends on changes not yet on a released gem:
 
-* `relaton` → the `feat/jcgm-flavor` worktree, which provides the unreleased
-  `Relaton::Jcgm` flavor (`DataFetcher` / `Bibliography`).
-* `pubid` → the `refactor/flatten-jcgm-to-hash` worktree, which provides the
-  flattened `Pubid::Jcgm` `to_hash`/`from_hash` the index is serialized with. This
-  is pinned by path (not a `git:` ref) because the change is still uncommitted in
-  that worktree; the bare `GUM`/`VIM-N` guide and `Corrigendum` parsing it builds
-  on is already merged to pubid `main`.
+* `relaton` → `main`, which provides the `Relaton::Jcgm` flavor
+  (`DataFetcher` / `Bibliography`).
+* `pubid` → `main`, which provides the flattened `Pubid::Jcgm`
+  `to_hash`/`from_hash` the index is serialized with, plus the bare `GUM`/`VIM-N`
+  guide and `Corrigendum` parsing.
 
-Swap both back to github/rubygems references once the branches ship.
+Swap both to rubygems references once released. `psych` is pinned to `~> 5.2.6`
+because 5.3.0 silently breaks the YAML round-trip the index relies on.

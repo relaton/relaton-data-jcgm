@@ -12,12 +12,10 @@ gem "psych", "~> 5.2.6"
 # CI-friendly). It is not yet on a released gem, hence the git ref.
 gem "pubid", git: "https://github.com/metanorma/pubid.git", branch: "main"
 
-# The JCGM flavor (Relaton::Jcgm::DataFetcher / Bibliography) is NOT yet merged —
-# it lives only on the unpushed relaton `feat/jcgm-flavor` worktree, so it must be
-# pinned by local path for now. CI cannot resolve this until the flavor merges.
-# TODO: swap to `gem "relaton", git: "https://github.com/relaton/relaton.git",
-# branch: "main"` once feat/jcgm-flavor ships.
-gem "relaton", path: "/work/relaton/relaton/.claude/worktrees/feat/jcgm-flavor"
+# The JCGM flavor (Relaton::Jcgm::DataFetcher / Bibliography) is now merged to
+# relaton `main`, so track it from github over HTTPS (anonymous clone,
+# CI-friendly). It is not yet on a released gem, hence the git ref.
+gem "relaton", git: "https://github.com/relaton/relaton.git", branch: "main"
 
 group :development, :test do
   gem "rspec", "~> 3.13"
