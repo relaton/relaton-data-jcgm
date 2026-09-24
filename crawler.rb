@@ -49,7 +49,7 @@ fetcher.index.save
 # split. index.save writes only the .yaml, but Bibliography downloads
 # index-v1.zip, so produce the zip here (rubyzip is a relaton runtime dependency).
 require "zip"
-Zip::File.open("index-v1.zip", Zip::File::CREATE) do |zip|
+Zip::File.open("index-v1.zip", create: true) do |zip|
   zip.add "index-v1.yaml", "index-v1.yaml"
 end
 
