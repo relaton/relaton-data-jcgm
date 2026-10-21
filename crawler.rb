@@ -26,12 +26,10 @@ end
 
 require "relaton/jcgm/data_fetcher"
 
-# Start clean so removed sources never leave orphan files/rows behind.
-FileUtils.rm_rf "data"
-FileUtils.rm_f Dir.glob("index-v1.*")
-
 # Meetings: writes data/jcgm/meeting/*.yaml and their index rows, then saves.
-Relaton::Jcgm::DataFetcher.fetch("bipm-data-outcomes")
+# Incremental crawl (relaton#328): byte-identical records are skipped and
+# files left by removed sources are pruned; an empty fetch prunes nothing.
+Relaton::Jcgm::DataFetcher.fetch("bipm-data-outcomes", prune: true)
 
 # Static guides: index each through the gem's public guarded add_to_index. The
 # fetcher shares the pooled :jcgm index (already holding the meeting rows), so
