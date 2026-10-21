@@ -26,6 +26,11 @@ end
 
 require "relaton/jcgm/data_fetcher"
 
+# Clear the index zips before the shared workflow re-adds entries (the zip
+# step adds, so a stale zip fails with Zip::EntryExistsError); the fetch
+# rewrites the yaml itself.
+FileUtils.rm_f Dir.glob("index-v1.*")
+
 # Meetings: writes data/jcgm/meeting/*.yaml and their index rows, then saves.
 # Incremental crawl (relaton#328): byte-identical records are skipped and
 # files left by removed sources are pruned; an empty fetch prunes nothing.
