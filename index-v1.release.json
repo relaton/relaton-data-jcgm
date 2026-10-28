@@ -1,11 +1,11 @@
 {
   "version": 1,
   "index": "index-v1",
-  "sha256": "fe6e6b0a3012bd0dda11395a1db91078fd451769b4410510a063f07de0c0c457",
-  "bytes": 634,
+  "sha256": "a98782db240da08a821c43cdb20a171672e77f0de2189c32490a9982b86b4427",
+  "bytes": 560,
   "count": 27,
-  "generated": "2026-10-27T19:16:22Z",
-  "source_revision": "37e67d1be45a3693dee208e1fc3731377ccb6cf6",
-  "run_id": "40567470947",
+  "generated": "2026-10-28T19:23:00Z",
+  "source_revision": "29c611db047a7a271dc634e72eeedb06517913b1",
+  "run_id": "40753695939",
   "repository": "relaton/relaton-data-jcgm"
 }
