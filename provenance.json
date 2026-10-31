@@ -1,9 +1,9 @@
 {
   "repository": "relaton/relaton-data-jcgm",
   "workflow": "Crawler",
-  "run_id": "41111689458",
+  "run_id": "41228775833",
   "run_attempt": "1",
-  "source_revision": "2af6bd07c566a4e9b5a004f103b5e624808d9eca",
+  "source_revision": "376caa7a2a695f0457a025acf2ebc22bfc21ee51",
   "crawler": "bundle exec ruby crawler.rb",
-  "crawled_at": "2026-10-30T19:01:46Z"
+  "crawled_at": "2026-10-31T18:19:28Z"
 }
